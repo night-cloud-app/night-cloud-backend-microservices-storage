@@ -5,17 +5,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR "/src"
-COPY "/Shared" "Shared/"
-WORKDIR "Microservices/Storage/Storage.API"
-COPY "Microservices/Storage/Storage.API" .
+WORKDIR "microservices/storage/Storage.API"
+COPY "microservices/storage/Storage.API" .
 RUN dotnet restore "Storage.API.csproj"
 
-WORKDIR "/src/Microservices/Storage/Tests/Storage.API.UnitTests"
-COPY "/Microservices/Storage/Tests/Storage.API.UnitTests" .
+WORKDIR "/src/microservices/storage/Tests/Storage.API.UnitTests"
+COPY "/microservices/storage/Tests/Storage.API.UnitTests" .
 RUN dotnet test -c Release
 
 COPY . .
-WORKDIR "/src/Microservices/Storage/Storage.API"
+WORKDIR "/src/microservices/storage/Storage.API"
 RUN dotnet build "Storage.API.csproj" -c Release -o "/app/build"
 
 FROM build AS publish
