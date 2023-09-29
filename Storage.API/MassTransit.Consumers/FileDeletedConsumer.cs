@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using QueueMessaging.File;
+using NightCloud.Common.QueueMessaging.File;
 using Storage.API.Services.Contracts;
 
 namespace Storage.API.MassTransit.Consumers;

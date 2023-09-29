@@ -1,4 +1,4 @@
-﻿using Middlewares.Authentication;
+﻿using NightCloud.Common.Middlewares.Authentication;
 using Serilog;
 
 namespace Storage.API.Extensions;
