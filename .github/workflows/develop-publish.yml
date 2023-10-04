@@ -46,10 +46,10 @@ jobs:
 
             docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/develop/storage-microservice-api:latest
 
-            docker stop storage-api-microservice
+            docker stop storage-microservice-api
 
-            docker rm storage-api-microservice
+            docker rm storage-microservice-api
 
             cd ./docker
             
-            docker compose -f docker-compose-develop.yaml up storage-api-microservice -d --build
+            docker compose -f docker-compose-develop.yaml up storage-microservice-api -d --build
