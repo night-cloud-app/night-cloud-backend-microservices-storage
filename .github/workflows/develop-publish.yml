@@ -29,3 +29,23 @@ jobs:
           file: ./Storage.API/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_REGISTRY }}/${{ secrets.REGISTRY_USERNAME }}/develop/storage-microservice-api
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 'Install SSH Key'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            docker stop storage-api-microservice
+
+            docker rm storage-api-microservice
+
+            cd ./docker
+            
+            docker compose -f docker-compose-develop.yaml up storage-api-microservice -d --build
